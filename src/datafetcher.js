@@ -4,7 +4,7 @@ const { StacksMainnet } = require("@stacks/network");
 const mongoose = require("mongoose");
 const dataModel = require("./datamodel");
 
-const blockchainApi = process.env.BLOCKCHAIN_API;
+const rpcUrl = process.env.RPC_URL;
 const connectionString = process.env.MONGODB_CONNECTION_STRING;
 
 let data = {
@@ -17,7 +17,7 @@ let data = {
   pools: { "SP1Z92MPDQEWZXW36VX71Q25HKF5K2EPCJ304F275-liquidity-token-v5kglq1fqfp": { uwu: 0, stx: 0, usd: 0 } }
 };
 
-if (!blockchainApi || !connectionString) {
+if (!rpcUrl || !connectionString) {
   console.error(`[Data Fetcher - ${Date.now()}] Missing one or more of the required environment variables.`);
   process.exit(1);
 };
@@ -58,7 +58,7 @@ const callReadOnly = async (contractAddress, contractName, functionName) => {
 };
 
 const fetchTokenBalance = async (token, address, type = "balance") => {
-  const url = `${blockchainApi}/extended/v1/address/${address}/balances?unanchored=true`;
+  const url = `${rpcUrl}/extended/v1/address/${address}/balances?unanchored=true`;
   const response = await fetchJSON(url);
 
   const balance = token === "stx"
@@ -74,7 +74,7 @@ const fetchTokenBalance = async (token, address, type = "balance") => {
 };
 
 const fetchTimestamp = async (address) => {
-  const url = `${blockchainApi}/extended/v1/address/${address}/transactions?limit=1`;
+  const url = `${rpcUrl}/extended/v1/address/${address}/transactions?limit=1`;
   const response = await fetchJSON(url);
 
   const timestamp = response.results?.[0]?.burn_block_time;
@@ -100,7 +100,7 @@ const fetchAllData = async () => {
     data.oracle.timestamp.source = await fetchTimestamp("SP32BWYT80264254QRAB4ZZSR1W14VTKSQ92Y1GZ3");
     data.oracle.timestamp.proxy = await fetchTimestamp("SP17BSF329AQEY7YA3CWQHN3KGQYTYYP7208CQH4G");
 
-    data.system.collateral.stx = Number((await fetchJSON(`${blockchainApi}/extended/v1/address/SP2AKWJYC7BNY18W1XXKPGP0YVEK63QJG4793Z2D4.uwu-factory-v1-1-0/stx?unanchored=true`)).balance) / 1000000;
+    data.system.collateral.stx = Number((await fetchJSON(`${rpcUrl}/extended/v1/address/SP2AKWJYC7BNY18W1XXKPGP0YVEK63QJG4793Z2D4.uwu-factory-v1-1-0/stx?unanchored=true`)).balance) / 1000000;
     data.system.collateral.usd = data.system.collateral.stx * data.prices.stx;
     data.system.debt = Number((await callReadOnly("SP2AKWJYC7BNY18W1XXKPGP0YVEK63QJG4793Z2D4", "uwu-token-v1-1-0", "get-total-supply")).value.value) / 1000000;
     data.system.ratio = ((data.system.collateral.stx * data.oracle.price) / data.system.debt) * 100;
