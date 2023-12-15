@@ -1,5 +1,5 @@
 # Data Fetcher
-A microservice that gathers insights on UWU Protocol and stores it in a MonogoDB database.
+A microservice that gathers insights on UWU Protocol and stores the data in a MongoDB database.
 
 ## Development Notice
 This project is currently in early access. Please note that the `data.usm.feeY` and `system.holders.uwu` data points contain hardcoded values. These data points will be updated to reflect live data in the near future.
