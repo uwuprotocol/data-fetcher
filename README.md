@@ -1,8 +1,8 @@
 # Data Fetcher
-A microservice that gathers insights on UWU Protocol.
+A microservice that gathers insights on UWU Protocol and stores it in a MonogoDB database.
 
 ## Development Notice
-This project is currently in early access. Please note that the `data.usm.feeX`, `data.usm.feeY`, and `system.holders.uwu` data points currently contain hardcoded values. These data points will be updated to reflect live data in the near future.
+This project is currently in early access. Please note that the `data.usm.feeY` and `system.holders.uwu` data points contain hardcoded values. These data points will be updated to reflect live data in the near future.
 
 ## Setup
 1. Clone the repository: 
@@ -41,7 +41,7 @@ The following environment variables are needed in the `.env` file:
 - `MONGODB_CONNECTION_STRING`: The connection string for the MongoDB database.
 
 ## Discussion
-Please join us on [Discord](http://chat.quorumdao.org) for discussions or report any issues you encounter on this Github repository or on our [Canny](https://uwu.canny.io).
+Please join us on [Discord](http://chat.uwu.cash) for discussions or report any issues you encounter on this Github repository or on our [Canny](https://uwu.canny.io).
 
 ## Code of Conduct
 Please read our [Code of Conduct](CODE_OF_CONDUCT.md) to understand our community standards and expectations.
