@@ -102,8 +102,8 @@ const fetchAllData = async () => {
     data.prices.susdt = (await fetchJSON("https://api.coingecko.com/api/v3/simple/price?ids=alex-wrapped-usdt&vs_currencies=usd"))["alex-wrapped-usdt"].usd;
 
     data.oracle.price = Number((await callReadOnly("SP2AKWJYC7BNY18W1XXKPGP0YVEK63QJG4793Z2D4", "uwu-oracle-proxy-v1-1-0", "get-stx-price")).value.value) / 1000000;
-    data.oracle.timestamp.source = await fetchTimestamp("SP2C2YFP12AJZB4MABJBAJ55XECVS7E4PMMZ89YZR.arkadiko-oracle-v2-2");
-    data.oracle.timestamp.proxy = await fetchTimestamp("SP2AKWJYC7BNY18W1XXKPGP0YVEK63QJG4793Z2D4.uwu-oracle-v1-1-2");
+    data.oracle.timestamp.source = await fetchTimestamp("SP2C2YFP12AJZB4MABJBAJ55XECVS7E4PMMZ89YZR.arkadiko-oracle-v2-3");
+    data.oracle.timestamp.proxy = await fetchTimestamp("SP2AKWJYC7BNY18W1XXKPGP0YVEK63QJG4793Z2D4.uwu-oracle-v1-1-3");
 
     data.system.collateral.stx = Number((await fetchJSON(`${rpcUrl}/extended/v1/address/SP2AKWJYC7BNY18W1XXKPGP0YVEK63QJG4793Z2D4.uwu-factory-v1-1-0/stx?unanchored=true`)).balance) / 1000000;
     data.system.collateral.usd = data.system.collateral.stx * data.prices.stx;
