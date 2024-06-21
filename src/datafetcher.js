@@ -94,7 +94,7 @@ const fetchSTXBalance = (address, type = "balance") => fetchTokenBalance("stx", 
 
 const fetchUWUBalance = (address, type = "balance") => fetchTokenBalance("SP2AKWJYC7BNY18W1XXKPGP0YVEK63QJG4793Z2D4.uwu-token-v1-1-0::uwu", address, type);
 
-const fetchSUSDTBalance = (address, type = "balance") => fetchTokenBalance("SP3K8BC0PPEVCV7NZ6QSRWPQ2JE9E5B6N3PA0KBR9.token-susdt::bridged-usdt", address, type);
+const fetchSUSDTBalance = (address, type = "balance") => fetchTokenBalance("SP2XD7417HGPRTREMKF748VNEQPDRR0RMANB7X1NK.token-susdt::bridged-usdt", address, type);
 
 const fetchAllData = async () => {
   try {
@@ -127,9 +127,9 @@ const fetchAllData = async () => {
       data.system.new.debt = data.system.debt - docs[0].system.debt;
     };
 
-    data.usm.uwu = Number(await fetchUWUBalance("SP2AKWJYC7BNY18W1XXKPGP0YVEK63QJG4793Z2D4.uwu-stability-module-v1-1-0")) / 1000000;
-    data.usm.susdt = Number(await fetchSUSDTBalance("SP2AKWJYC7BNY18W1XXKPGP0YVEK63QJG4793Z2D4.uwu-stability-module-v1-1-0")) / 100000000;
-    data.usm.feeX = Number((await callReadOnly("SP2AKWJYC7BNY18W1XXKPGP0YVEK63QJG4793Z2D4", "uwu-stability-module-v1-1-0", "get-stability-module")).value.data["fee-rate"].value) / 100;
+    data.usm.uwu = Number(await fetchUWUBalance("SP2AKWJYC7BNY18W1XXKPGP0YVEK63QJG4793Z2D4.uwu-stability-module-v1-1-1")) / 1000000;
+    data.usm.susdt = Number(await fetchSUSDTBalance("SP2AKWJYC7BNY18W1XXKPGP0YVEK63QJG4793Z2D4.uwu-stability-module-v1-1-1")) / 100000000;
+    data.usm.feeX = Number(0.00);
     data.usm.feeY = Number(0.00);
 
     data.treasury.balances.uwu = Number(await fetchUWUBalance("SP6BE9VJRG7YDAH46FC26FC3YYHNE8FA4E4EADTV")) / 1000000;
